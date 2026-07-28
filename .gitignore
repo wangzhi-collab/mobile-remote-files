@@ -1,0 +1,20 @@
+node_modules/
+
+# Local runtime output
+server.log
+server-run.*
+download_cache/
+*.log
+*.local
+.env
+.env.*
+
+# Deployment/build artifacts
+*.tar.gz
+*.zip
+*.exe
+public/downloads/
+
+# Local auth/temp files
+.ssh-askpass*
+.known_hosts*

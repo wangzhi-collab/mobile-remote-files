@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>手机文件遥控</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="host-view hidden" id="hostView">
+        <div class="host-panel">
+          <p class="eyebrow">Computer Host</p>
+          <h1>电脑端配对</h1>
+          <p class="auth-note">保持此页面和服务运行。手机打开下方地址后，输入这组临时 PIN 完成配对。</p>
+          <div class="pin-card">
+            <span>手机配对 PIN</span>
+            <strong id="hostPin">------</strong>
+          </div>
+          <div class="host-info">
+            <span>手机访问地址</span>
+            <div id="phoneUrls" class="url-list"></div>
+          </div>
+          <p class="host-warning">PIN 会在本次服务启动期间有效。重启服务后会生成新的 PIN。</p>
+        </div>
+      </section>
+
+      <section class="auth-view" id="authView">
+        <div class="auth-panel">
+          <p class="eyebrow">Mobile Pairing</p>
+          <h1>手机文件遥控</h1>
+          <p class="auth-note">先在电脑上运行代理程序，输入代理窗口显示的 PIN 后即可连接电脑。</p>
+          <div class="download-panel">
+            <span>电脑端代理</span>
+            <a href="./downloads/PhoneRemoteAgent-Windows.zip" download>下载 Windows 版</a>
+          </div>
+          <form id="loginForm" class="login-form">
+            <label>
+              <span>配对 PIN</span>
+              <input id="pinInput" type="password" inputmode="numeric" autocomplete="one-time-code" placeholder="6 位数字">
+            </label>
+            <button class="primary-btn" type="submit">
+              <span class="btn-symbol">-&gt;</span>
+              <span>连接电脑</span>
+            </button>
+          </form>
+          <p class="auth-error" id="authError"></p>
+        </div>
+      </section>
+
+      <section class="main-view hidden" id="mainView">
+        <header class="topbar">
+          <div class="brand-block">
+            <p class="eyebrow">Remote Files</p>
+            <h1>手机文件遥控</h1>
+            <p class="host-line" id="hostLine">等待连接</p>
+          </div>
+          <button class="icon-btn" id="refreshBtn" type="button" title="刷新">R</button>
+        </header>
+
+        <section class="control-strip">
+          <label class="root-field">
+            <span>位置</span>
+            <select id="rootSelect"></select>
+          </label>
+          <label class="search-field">
+            <span>搜索</span>
+            <input id="searchInput" type="search" placeholder="输入文件名关键词">
+          </label>
+          <button class="icon-btn" id="clearSearchBtn" type="button" title="清空搜索">x</button>
+        </section>
+
+        <section class="pathbar">
+          <button class="soft-btn" id="upBtn" type="button">上级</button>
+          <div class="crumbs" id="crumbs"></div>
+        </section>
+
+        <section class="summary-row">
+          <span id="summaryText">0 项</span>
+          <span id="statusText">已就绪</span>
+        </section>
+
+        <section class="file-list" id="fileList" aria-label="文件列表"></section>
+      </section>
+    </main>
+    <!-- 下载进度条弹窗 -->
+    <div id="downloadProgress" class="progress-modal hidden">
+      <div class="progress-card">
+        <div class="progress-info">
+          <span id="progressFileName" class="progress-filename">文件名.txt</span>
+          <span id="progressPercent" class="progress-percent">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div id="progressBarFill" class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-details">
+          <span id="progressBytes">0 MB / 0 MB</span>
+          <button id="cancelDownloadBtn" class="cancel-btn" type="button">取消</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 全屏图片预览遮罩层 -->
+    <div id="imagePreview" class="preview-overlay hidden">
+      <button id="closePreviewBtn" class="close-preview-btn" type="button">关闭预览</button>
+      <div class="preview-content">
+        <img id="previewImg" class="hidden" src="" alt="预览图片">
+        <canvas id="previewCanvas" class="hidden"></canvas>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

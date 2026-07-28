@@ -1,0 +1,15 @@
+{
+  "name": "mobile-remote-files",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mobile web app for searching and downloading files from this computer over LAN.",
+  "scripts": {
+    "start": "node server.js",
+    "agent": "node agent/pc-agent.js",
+    "agent:win": "powershell -NoProfile -ExecutionPolicy Bypass -File agent/pc-agent.ps1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {}
+}
